@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/*
+ * Rotation — thème sombre unique.
+ *
+ * L'application se consulte en écoutant de la musique, souvent le soir : on
+ * assume un seul thème sombre plutôt qu'un basculement clair/sombre à moitié
+ * réglé. Les couleurs d'accent sont volontairement éloignées du vert Spotify —
+ * les Design Guidelines interdisent de laisser croire à un produit officiel.
+ */
+:root {
+  --background: #0b0b0f;
+  --surface: #14141b;
+  --surface-hover: #1c1c26;
+  --border: #26263340;
+  --foreground: #f2f2f5;
+  --muted: #8f8fa3;
+  --accent: #c084fc;
+  --accent-strong: #a855f7;
+  --positive: #4ade80;
+  --negative: #fb7185;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Anneau de focus visible au clavier : la notation se fait aux touches 0-5,
+   il faut savoir en permanence quel élément a le focus. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Retour visuel de la notation.
+ *
+ * Noter est l'acte central de l'application, et il est silencieux : sans
+ * réaction, on doute d'avoir cliqué. L'animation diffère selon l'avis — on ne
+ * confirme pas un rejet comme un coup de cœur — mais reste brève pour ne pas
+ * gêner l'enchaînement des morceaux.
+ * ------------------------------------------------------------------------- */
+
+@keyframes rating-love {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.35) rotate(-6deg); }
+  70%  { transform: scale(0.95) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes rating-meh {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rating-reject {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-3px) rotate(-3deg); }
+  50%      { transform: translateX(3px) rotate(3deg); }
+  80%      { transform: translateX(-2px); }
+}
+
+@keyframes rating-float {
+  0%   { opacity: 0; transform: translateY(4px) scale(0.7); }
+  30%  { opacity: 1; transform: translateY(-6px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-22px) scale(1); }
+}
+
+.animate-rating-love   { animation: rating-love   420ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+.animate-rating-meh    { animation: rating-meh    260ms ease-out; }
+.animate-rating-reject { animation: rating-reject 320ms ease-in-out; }
+.animate-rating-float  { animation: rating-float  900ms ease-out forwards; }
+
+/* ===========================================================================
+ * MANCHETTE — la section /news.
+ *
+ * Univers graphique volontairement opposé au reste de l'app : papier clair,
+ * encre noire et un unique rouge signal, façon affiche suisse. Règle de fer :
+ * le rouge n'apparaît que sur les marqueurs d'actualité (rubrique active,
+ * ● nouveau, survols de liens externes) — sa rareté fait sa valeur.
+ * ======================================================================== */
+
+@theme inline {
+  --color-papier: #f2efe9;
+  --color-encre: #0a0a0a;
+  --color-encre-2: #4a463e;
+  --color-filet-faible: #d8d2c4;
+  /* Rouge d'affiche assombri juste ce qu'il faut pour porter du texte : à
+     #e63012 il ne contrastait qu'à 3,8:1 sur le papier, sous le seuil AA,
+     alors qu'il sert aussi aux mentions « ● nouveau » en corps 11. */
+  --color-signal: #cc2000;
+  --font-titrage: var(--font-anton), var(--font-geist-sans), sans-serif;
+  --font-titre: var(--font-archivo), var(--font-geist-sans), sans-serif;
+  --font-texte: var(--font-spectral), georgia, serif;
+  --font-telex: var(--font-space-mono), var(--font-geist-mono), monospace;
+}
+
+/* La section vit dans une app au thème sombre : on re-scope le focus. */
+.manchette :focus-visible {
+  outline-color: var(--color-signal);
+}
+
+/* Mots « en creux » : contour d'encre, remplissage au survol ou à l'état
+   actif. C'est toute la navigation — la typo est le menu. */
+.creux {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-encre);
+  paint-order: stroke fill;
+  transition: color 150ms ease;
+}
+/* Sur écrans basse densité le trait d'1,5px paraît maigre. */
+@media (max-resolution: 1.5dppx) {
+  .creux {
+    -webkit-text-stroke-width: 2px;
+  }
+}
+.creux:hover,
+a:hover > .creux,
+a:focus-visible > .creux {
+  color: var(--color-encre);
+}
+/* Filigrane : initiale géante derrière les articles sans image. */
+.creux-filigrane {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-encre);
+  opacity: 0.16;
+}
+
+/* Toutes les photos, quelle que soit la source, passent en bichromie
+   encre/papier — la couleur réelle se révèle au survol de la carte. */
+.presse-img {
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 200ms ease;
+}
+.carte:hover .presse-img,
+.carte:focus-within .presse-img {
+  filter: none;
+}
+
+/* Cordon « dernière heure » : marquee CSS sur piste dupliquée. La règle
+   prefers-reduced-motion globale (durées à 0.01ms) le fige d'office. */
+@keyframes cordon-defile {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.cordon-piste {
+  animation: cordon-defile 90s linear infinite;
+  will-change: transform;
+}
+.cordon:hover .cordon-piste {
+  animation-play-state: paused;
+}
+
+/* Articles déjà lus (marqués via localStorage) : encre diluée. */
+.est-lu {
+  color: var(--color-encre-2);
+}
+
+/* Mire typographique : remplace une image absente ou morte. Barres d'encre
+   pur CSS, aucun asset. */
+.mire {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-encre) 0 6px,
+    var(--color-papier) 6px 14px,
+    var(--color-encre-2) 14px 17px,
+    var(--color-papier) 17px 34px,
+    var(--color-filet-faible) 34px 48px,
+    var(--color-papier) 48px 56px
+  );
+}
+
+/* Barre de progression de lecture — purement décorative, absente sans
+   support des animations pilotées par le défilement. */
+@supports (animation-timeline: scroll()) {
+  .barre-lecture {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--color-signal);
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    animation: lecture-avance linear both;
+    animation-timeline: scroll(root);
+    z-index: 60;
+  }
+  @keyframes lecture-avance {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+}
+
+/* View transitions : le repère rouge glisse entre les rubriques, la rivière
+   sortante s'essuie vers la gauche, l'entrante arrive de la droite. */
+::view-transition-group(tally) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+::view-transition-old(riviere) {
+  animation: riviere-sort 250ms cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+::view-transition-new(riviere) {
+  animation: riviere-entre 250ms cubic-bezier(0.7, 0, 0.3, 1) both;
+}
+@keyframes riviere-sort {
+  to { transform: translateX(-2.5%); opacity: 0; }
+}
+@keyframes riviere-entre {
+  from { transform: translateX(2.5%); opacity: 0; }
+}
+
+/* « Flash » d'agence : fond rouge à 8% qui s'éteint, à l'arrivée de
+   nouvelles dépêches. */
+@keyframes flash-agence {
+  from { background-color: color-mix(in srgb, var(--color-signal) 8%, transparent); }
+  to   { background-color: transparent; }
+}
+.flash-agence {
+  animation: flash-agence 1.2s ease-out both;
+}
