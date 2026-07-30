@@ -1,5 +1,13 @@
 # NextTrack
 
+[![CI](https://github.com/arseneHuot/spotifyreco/actions/workflows/ci.yml/badge.svg)](https://github.com/arseneHuot/spotifyreco/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-a855f7)](LICENSE)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-black?logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
+[![Supabase](https://img.shields.io/badge/Supabase-Postgres%20%2B%20Auth-3FCF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![Claude](https://img.shields.io/badge/AI%20engine-Claude-d97757?logo=anthropic&logoColor=white)](https://www.anthropic.com)
+[![Spotify API](https://img.shields.io/badge/Spotify-Web%20API%20%2B%20Playback%20SDK-1DB954?logo=spotify&logoColor=white)](https://developer.spotify.com)
+
 **Self-hosted music recommendations that don't go in circles.**
 
 NextTrack connects to your Spotify account, logs what you actually listen to,
