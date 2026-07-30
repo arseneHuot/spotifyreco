@@ -304,14 +304,14 @@ describe("reprise sur NO_ACTIVE_DEVICE", () => {
     expect(pathOf(2)).toBe(`/me/player/play?device_id=${DEVICE_ID}`);
   });
 
-  it("retrouve l'appareil Rotation quand l'interface n'en fournit pas", async () => {
+  it("retrouve l'appareil NextTrack quand l'interface n'en fournit pas", async () => {
     spotifyFetch
       .mockRejectedValueOnce(noActiveDevice())
       .mockResolvedValueOnce({
         // Cas vérifié en production : des appareils existent, aucun n'est actif.
         devices: [
           { id: "autre", is_active: false, name: "MacBook Air" },
-          { id: DEVICE_ID, is_active: false, name: "Rotation" },
+          { id: DEVICE_ID, is_active: false, name: "NextTrack" },
         ],
       })
       .mockResolvedValueOnce(null)
@@ -338,10 +338,10 @@ describe("reprise sur NO_ACTIVE_DEVICE", () => {
     expect(spotifyFetch).toHaveBeenCalledTimes(2);
   });
 
-  it("ignore un appareil Rotation restreint", async () => {
+  it("ignore un appareil NextTrack restreint", async () => {
     spotifyFetch.mockRejectedValueOnce(noActiveDevice()).mockResolvedValueOnce({
       devices: [
-        { id: DEVICE_ID, is_active: false, is_restricted: true, name: "Rotation" },
+        { id: DEVICE_ID, is_active: false, is_restricted: true, name: "NextTrack" },
       ],
     });
 

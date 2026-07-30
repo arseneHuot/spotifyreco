@@ -67,7 +67,7 @@ const DEVICE_SETTLE_MS = 400;
  * Sert de filet quand l'interface n'a pas transmis de `deviceId` : sans lui, la
  * lecture échouerait alors que l'appareil existe bel et bien côté Spotify.
  */
-const ROTATION_DEVICE_NAME = "Rotation";
+const NEXTTRACK_DEVICE_NAME = "NextTrack";
 
 /** Appareil Spotify Connect. Forme relevée sur une réponse réelle. */
 export type SpotifyPlaybackDevice = {
@@ -105,7 +105,7 @@ export class InvalidTrackIdError extends Error {
 export class NoActiveDeviceError extends Error {
   constructor() {
     super(
-      "No active Spotify device. Open Rotation in a tab and " +
+      "No active Spotify device. Open NextTrack in a tab and " +
         "wait for the player to be ready, or start Spotify on a device.",
     );
     this.name = "NoActiveDeviceError";
@@ -115,7 +115,7 @@ export class NoActiveDeviceError extends Error {
 /** Le compte n'est pas Premium : Spotify Connect lui est fermé. */
 export class PremiumRequiredError extends Error {
   constructor() {
-    super("Playing from Rotation requires a Spotify Premium account.");
+    super("Playing from NextTrack requires a Spotify Premium account.");
     this.name = "PremiumRequiredError";
   }
 }
@@ -216,7 +216,7 @@ export async function playTracks(
   }
 
   // À partir d'ici : 404, aucun appareil n'a pris la commande.
-  const target = deviceId ?? (await findRotationDeviceId(userId));
+  const target = deviceId ?? (await findNextTrackDeviceId(userId));
   if (!target) throw new NoActiveDeviceError();
 
   // `play: false` : on veut activer l'appareil, pas reprendre ce qui traînait
@@ -239,7 +239,7 @@ export async function playTracks(
  *
  * Indispensable quand la lecture est active ailleurs : sans transfert, le
  * `PUT /play` joue sur l'appareil actif (le téléphone, l'enceinte) au lieu de
- * l'onglet Rotation, ou échoue si aucun appareil n'est actif.
+ * l'onglet NextTrack, ou échoue si aucun appareil n'est actif.
  */
 export async function transferPlayback(
   userId: string,
@@ -318,14 +318,14 @@ async function sendPlay(
 /**
  * Repère le device du SDK quand l'appelant n'a pas transmis d'identifiant.
  *
- * Volontairement limité à l'appareil « Rotation » : se rabattre sur le premier
+ * Volontairement limité à l'appareil « NextTrack » : se rabattre sur le premier
  * appareil venu reviendrait à démarrer la musique sur le téléphone ou l'enceinte
  * de l'utilisateur, à son insu.
  */
-async function findRotationDeviceId(userId: string): Promise<string | null> {
+async function findNextTrackDeviceId(userId: string): Promise<string | null> {
   const devices = await listDevices(userId);
   const rotation = devices.find(
-    (device) => device.name === ROTATION_DEVICE_NAME && device.id && !device.is_restricted,
+    (device) => device.name === NEXTTRACK_DEVICE_NAME && device.id && !device.is_restricted,
   );
   return rotation?.id ?? null;
 }

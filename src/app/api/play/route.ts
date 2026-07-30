@@ -31,7 +31,7 @@ const bodySchema = z
     trackId: z.string().optional(),
     trackIds: z.array(z.string()).min(1).max(MAX_TRACKS).optional(),
     // Fourni par l'événement `ready` du Web Playback SDK. Facultatif : à défaut,
-    // la couche lecture retrouve seule l'appareil « Rotation ».
+    // la couche lecture retrouve seule l'appareil « NextTrack ».
     //
     // `null` est accepté explicitement : c'est ce que le client envoie tant que
     // le lecteur n'a pas émis `ready` (et après `not_ready`). Le refuser ferait

@@ -6,8 +6,8 @@ type ExistingPlaylist = {
   playlistId: string;
   name: string;
   trackCount: number | null;
-  /** Créée depuis Rotation : remontée en tête et signalée. */
-  fromRotation: boolean;
+  /** Créée depuis NextTrack : remontée en tête et signalée. */
+  fromNextTrack: boolean;
 };
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
  * groupe est proposé d'emblée pour le second cas — c'est presque toujours
  * celui qu'on veut, puisque c'est la sélection qu'on vient de trier.
  *
- * Les playlists proposées sont celles créées par Rotation, pas toutes celles
+ * Les playlists proposées sont celles créées par NextTrack, pas toutes celles
  * du compte : ce sont les seules dont on connaisse l'identifiant sans payer
  * une pagination complète de l'API Spotify sur un quota partagé.
  */
@@ -211,10 +211,10 @@ function ExportDialog({
                 >
                   <span className="min-w-0 flex-1 truncate">
                     {playlist.name}
-                    {playlist.fromRotation && (
+                    {playlist.fromNextTrack && (
                       <span
                         className="ml-1.5 text-[10px] uppercase tracking-wide text-accent"
-                        title="Created from Rotation"
+                        title="Created from NextTrack"
                       >
                         ·R
                       </span>
@@ -237,7 +237,7 @@ function ExportDialog({
         </>
       ) : (
         <p className="mt-3 text-xs text-muted">
-          No playlist created from Rotation yet.
+          No playlist created from NextTrack yet.
         </p>
       )}
 

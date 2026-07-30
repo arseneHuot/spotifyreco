@@ -27,7 +27,7 @@ const serverSchema = z.object({
   CRON_SECRET: z.string().min(16),
 
   LASTFM_API_KEY: z.string().optional(),
-  MUSICBRAINZ_USER_AGENT: z.string().min(1).default("Rotation/0.1 ( unknown )"),
+  MUSICBRAINZ_USER_AGENT: z.string().min(1).default("NextTrack/0.1 ( unknown )"),
 
   NEXT_PUBLIC_SITE_URL: z.url().default("http://127.0.0.1:3000"),
 });

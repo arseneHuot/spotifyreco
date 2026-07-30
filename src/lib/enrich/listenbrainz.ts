@@ -387,6 +387,6 @@ function userAgent(): string {
   try {
     return env().MUSICBRAINZ_USER_AGENT;
   } catch {
-    return "Rotation/0.1 ( https://github.com/rotation )";
+    return "NextTrack/0.1 ( https://github.com/rotation )";
   }
 }

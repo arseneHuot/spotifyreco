@@ -1,19 +1,19 @@
-# Rotation
+# NextTrack
 
 **Self-hosted music recommendations that don't go in circles.**
 
-Rotation connects to your Spotify account, logs what you actually listen to,
+NextTrack connects to your Spotify account, logs what you actually listen to,
 learns from your explicit 0–5 ratings, and builds fresh selections every day —
 with two competing engines: a fully open, self-contained recommender, and
 Claude (Anthropic's LLM) reasoning over a natural-language portrait of your
 taste. You rate, they compete, the stats page tells you which one knows you
 better.
 
-![Rotation — browsing a selection while listening](docs/screenshots/app-playing.png)
+![NextTrack — browsing a selection while listening](docs/screenshots/app-playing.png)
 
 ## Why
 
-Spotify's own recommendations kept serving the same safe loop. Rotation exists
+Spotify's own recommendations kept serving the same safe loop. NextTrack exists
 to answer one question: *given everything I've listened to and everything I've
 rated, what should I hear next that I haven't already worn out?* Every design
 decision follows from it:
@@ -107,7 +107,7 @@ bar is still there. One generation at a time per user.
 **Playback happens in the browser** through the Spotify Web Playback SDK
 (Premium required): click a cover, rate from the sticky player with keys 0–5,
 skip with N, and tracks auto-advance at the end. Listening time is measured
-precisely for everything played inside Rotation — the Spotify API never
+precisely for everything played inside NextTrack — the Spotify API never
 provides it.
 
 ## Know before you start

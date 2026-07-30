@@ -1,6 +1,6 @@
 # Planifier la collecte
 
-Rotation a besoin d'appeler `/api/cron/poll` **toutes les 5 à 15 minutes**.
+NextTrack a besoin d'appeler `/api/cron/poll` **toutes les 5 à 15 minutes**.
 
 Cette fréquence n'est pas un confort. Elle découle de deux limites de l'API Spotify :
 
@@ -64,8 +64,8 @@ jobs:
       - run: |
           curl -sS -f -X GET "$URL" -H "Authorization: Bearer $SECRET"
         env:
-          URL: ${{ secrets.ROTATION_POLL_URL }}
-          SECRET: ${{ secrets.ROTATION_CRON_SECRET }}
+          URL: ${{ secrets.NEXTTRACK_POLL_URL }}
+          SECRET: ${{ secrets.NEXTTRACK_CRON_SECRET }}
 ```
 
 ## À ne pas faire : pg_cron dans Supabase

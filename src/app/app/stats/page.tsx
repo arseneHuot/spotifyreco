@@ -62,7 +62,7 @@ export default async function StatsPage() {
   const peak = Math.max(1, ...histogram.values());
 
   // --- Écoutes --------------------------------------------------------------
-  // La durée écoutée n'est connue que pour les morceaux lancés depuis Rotation :
+  // La durée écoutée n'est connue que pour les morceaux lancés depuis NextTrack :
   // l'historique Spotify (`recently-played`) dit *ce qui* a été joué, jamais
   // combien de temps. Le total est donc annoncé avec sa couverture, faute de
   // quoi il se lit comme un temps d'écoute global et paraît absurdement bas.
@@ -263,7 +263,7 @@ export default async function StatsPage() {
         <section className="mt-10">
           <h2 className="font-medium">Most listened artists</h2>
           <p className="mt-1 text-xs text-muted">
-            By play count. Time is shown when Rotation measured it.
+            By play count. Time is shown when NextTrack measured it.
           </p>
           <ul className="mt-4 space-y-2">
             {topArtists.map(([artist, { ms, plays }]) => (

@@ -99,7 +99,7 @@ describe("exportRecommendations", () => {
   it("crée la playlist puis y ajoute les morceaux dédoublonnés", async () => {
     const result = await exportRecommendations(USER, {
       trackIds: [...trackIds(3), ...trackIds(3)],
-      name: "Rotation — test",
+      name: "NextTrack — test",
     });
 
     expect(result.playlistId).toBe(NEW_PLAYLIST);
@@ -113,7 +113,7 @@ describe("exportRecommendations", () => {
   it("découpe en lots de 100 URI au maximum", async () => {
     const result = await exportRecommendations(USER, {
       trackIds: trackIds(150),
-      name: "Rotation — test",
+      name: "NextTrack — test",
     });
 
     const batches = urisSentTo(`/playlists/${NEW_PLAYLIST}/items`);
@@ -127,7 +127,7 @@ describe("exportRecommendations", () => {
     await expect(
       exportRecommendations(USER, {
         trackIds: trackIds(1),
-        name: "Rotation — test",
+        name: "NextTrack — test",
         playlistId: "7oIIrLcqQPCPmuLKMhxHTB",
       }),
     ).rejects.toBeInstanceOf(PlaylistNotFoundError);
@@ -154,7 +154,7 @@ describe("requalification des 403", () => {
     await expect(
       exportRecommendations(USER, {
         trackIds: trackIds(2),
-        name: "Rotation — test",
+        name: "NextTrack — test",
       }),
     ).rejects.toBeInstanceOf(PlaylistForbiddenError);
 
@@ -181,7 +181,7 @@ describe("requalification des 403", () => {
     await expect(
       exportRecommendations(USER, {
         trackIds: trackIds(2),
-        name: "Rotation — test",
+        name: "NextTrack — test",
       }),
     ).rejects.toBeInstanceOf(SpotifyNotAllowlistedError);
   });
@@ -195,7 +195,7 @@ describe("requalification des 403", () => {
     await expect(
       exportRecommendations(USER, {
         trackIds: trackIds(2),
-        name: "Rotation — test",
+        name: "NextTrack — test",
       }),
     ).rejects.toBeInstanceOf(SpotifyApiError);
 

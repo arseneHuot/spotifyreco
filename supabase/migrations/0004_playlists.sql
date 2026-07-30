@@ -4,8 +4,8 @@
 -- La playlist vit chez Spotify : c'est lui qui détient le contenu, l'ordre et
 -- la suppression. On conserve malgré tout un lien local, pour une raison
 -- précise : pouvoir RÉALIMENTER la même playlist au lieu d'en créer une par
--- export. Sans cette table, chaque envoi produirait « Rotation — 28 juillet
--- 2026 », puis « Rotation — 29 juillet 2026 », et la bibliothèque de
+-- export. Sans cette table, chaque envoi produirait « NextTrack — 28 juillet
+-- 2026 », puis « NextTrack — 29 juillet 2026 », et la bibliothèque de
 -- l'utilisateur se remplirait de playlists de trois morceaux.
 --
 -- Retrouver ces playlists côté Spotify coûterait une pagination complète de
@@ -22,7 +22,7 @@ create table public.playlists (
   -- l'utilisateur renomme la playlist dans Spotify, la vérité est chez lui,
   -- mais on n'a pas de raison de dépenser une requête pour s'en apercevoir.
   name                text not null,
-  -- Nombre de morceaux ENVOYÉS par Rotation, pas la taille réelle de la
+  -- Nombre de morceaux ENVOYÉS par NextTrack, pas la taille réelle de la
   -- playlist : l'utilisateur peut y ajouter ou retirer des titres de son côté.
   -- C'est un indicateur d'usage, pas une donnée faisant autorité.
   track_count         integer not null default 0,
@@ -37,11 +37,11 @@ create table public.playlists (
 );
 
 comment on table public.playlists is
-  'Playlists Spotify créées par Rotation. Sert à réalimenter une playlist
+  'Playlists Spotify créées par NextTrack. Sert à réalimenter une playlist
    existante plutôt qu''à en créer une nouvelle à chaque export.';
 
 comment on column public.playlists.track_count is
-  'Cumul des morceaux envoyés depuis Rotation, pas la taille réelle côté
+  'Cumul des morceaux envoyés depuis NextTrack, pas la taille réelle côté
    Spotify — l''utilisateur reste libre de modifier sa playlist.';
 
 -- Toutes les lectures se font « les playlists de cet utilisateur, la plus

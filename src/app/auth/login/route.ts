@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/server";
 /**
  * Démarre la connexion Spotify.
  *
- * Se connecter avec Spotify crée aussi le compte Rotation : il n'y a qu'une
+ * Se connecter avec Spotify crée aussi le compte NextTrack : il n'y a qu'une
  * seule identité, donc pas de compte à créer puis à relier dans un second temps.
  */
 export async function GET(request: NextRequest) {

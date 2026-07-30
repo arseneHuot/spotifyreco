@@ -7,7 +7,7 @@ import { env } from "@/lib/env";
 import type { Database } from "@/lib/supabase/database.types";
 
 /** Routes accessibles sans session. Tout le reste redirige vers l'accueil. */
-const PUBLIC_PATHS = ["/", "/auth", "/legal", "/api/cron", "/news", "/api/news"];
+const PUBLIC_PATHS = ["/", "/auth", "/legal", "/api/cron"];
 
 function isPublic(pathname: string): boolean {
   return PUBLIC_PATHS.some(

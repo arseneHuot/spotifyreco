@@ -46,7 +46,7 @@ const bodySchema = z.object({
 });
 
 /**
- * Nom par défaut, du type « Rotation — 28 July 2026 ».
+ * Nom par défaut, du type « NextTrack — 28 July 2026 ».
  *
  * Le fuseau est fixé à Paris : les fonctions Vercel tournent en UTC, et un
  * export passé 1 h du matin serait daté de la veille.
@@ -59,7 +59,7 @@ function defaultPlaylistName(): string {
     timeZone: DISPLAY_TIME_ZONE,
   }).format(new Date());
 
-  return `Rotation — ${date}`;
+  return `NextTrack — ${date}`;
 }
 
 /** Exporte une sélection de recommandations vers une playlist Spotify. */
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
  * Liste les playlists dans lesquelles la sélection peut être versée.
  *
  * L'appel à Spotify est nécessaire : la table locale ne connaît que les
- * playlists créées depuis Rotation, alors qu'on veut aussi pouvoir alimenter
+ * playlists créées depuis NextTrack, alors qu'on veut aussi pouvoir alimenter
  * celles qui existaient avant. Le repli sur la table locale garde le panneau
  * utilisable si Spotify est indisponible ou le quota épuisé.
  */
@@ -178,7 +178,7 @@ export async function GET() {
       playlistId: row.spotify_playlist_id,
       name: row.name,
       trackCount: row.track_count,
-      fromRotation: true,
+      fromNextTrack: true,
     })),
     source: "local",
   });

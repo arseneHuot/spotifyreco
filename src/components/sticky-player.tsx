@@ -105,7 +105,7 @@ export function StickyPlayer({ current, onDeviceReady, onRate, onNext }: Props) 
     if (playerRef.current || !window.Spotify) return;
 
     const player = new window.Spotify.Player({
-      name: "Rotation",
+      name: "NextTrack",
       getOAuthToken: (callback) => {
         void fetchToken().then((token) => token && callback(token));
       },

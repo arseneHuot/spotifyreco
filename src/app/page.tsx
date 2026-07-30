@@ -65,7 +65,7 @@ export default async function HomePage({
     <main className="flex flex-1 items-center justify-center px-4 py-12 sm:px-6 sm:py-16">
       <div className="w-full max-w-xl">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-          Rotation
+          NextTrack
         </p>
 
         <h1 className="mt-4 text-4xl font-semibold leading-tight sm:text-5xl">
@@ -73,7 +73,7 @@ export default async function HomePage({
         </h1>
 
         <p className="mt-5 text-lg leading-relaxed text-muted">
-          Rotation reads your listening history and your liked tracks, then
+          NextTrack reads your listening history and your liked tracks, then
           learns from your 0-5 ratings to build a selection that stays true to
           your taste — and keeps surprising you.
         </p>
@@ -150,7 +150,7 @@ export default async function HomePage({
         </dl>
 
         <p className="mt-10 text-xs leading-relaxed text-muted">
-          Rotation isn&apos;t affiliated with Spotify. Your data stays on your
+          NextTrack isn&apos;t affiliated with Spotify. Your data stays on your
           instance and can be deleted at any time.
         </p>
       </div>

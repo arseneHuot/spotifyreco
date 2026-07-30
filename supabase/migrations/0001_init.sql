@@ -1,5 +1,5 @@
 -- ============================================================================
--- Rotation — schéma initial
+-- NextTrack — schéma initial
 --
 -- Trois familles de tables :
 --   1. Comptes et secrets   → accessibles uniquement au rôle service_role
@@ -277,7 +277,7 @@ create type public.listen_source as enum (
 --
 -- `ms_played` est nullable PAR CONSTRUCTION : l'API Spotify ne renvoie jamais la
 -- durée réellement écoutée. Elle n'est connue que lorsque la lecture a eu lieu
--- dans Rotation (Web Playback SDK), ou estimée en observant `progress_ms`.
+-- dans NextTrack (Web Playback SDK), ou estimée en observant `progress_ms`.
 -- ----------------------------------------------------------------------------
 create table public.listens (
   id           bigint generated always as identity primary key,

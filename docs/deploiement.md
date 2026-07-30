@@ -26,7 +26,7 @@ erreur, pas seulement la page concernée.
 | `CRON_SECRET` | reprendre celle de `.env.local` | ✅ |
 | `SPOTIFY_CLIENT_ID` | `5839754b12e941caa677dd023df8fbbc` | pour l'auth |
 | `SPOTIFY_CLIENT_SECRET` | depuis le dashboard Spotify | pour l'auth |
-| `MUSICBRAINZ_USER_AGENT` | `Rotation/0.1 ( you@example.com )` | recommandé |
+| `MUSICBRAINZ_USER_AGENT` | `NextTrack/0.1 ( you@example.com )` | recommandé |
 | `ANTHROPIC_API_KEY` | pour le moteur IA | optionnel |
 | `LASTFM_API_KEY` | pour les tags et la similarité | optionnel |
 

@@ -106,7 +106,7 @@ export default async function AppPage() {
       <header className="mb-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
         <div className="flex min-w-0 items-baseline gap-3 sm:gap-4">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-            Rotation
+            NextTrack
           </p>
           <p className="truncate text-xs text-muted">
             {listenCount ?? 0} listens · {ratings?.length ?? 0} ratings
@@ -141,7 +141,7 @@ export default async function AppPage() {
           className="mb-6 rounded-lg border border-negative/30 bg-negative/10 p-3 text-sm text-muted"
         >
           <strong className="text-negative">Not a Premium account</strong> —
-          playback inside Rotation needs Premium. Collecting listens and rating
+          playback inside NextTrack needs Premium. Collecting listens and rating
           keep working.
         </p>
       )}

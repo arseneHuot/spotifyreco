@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rotation — recommendations that keep moving",
+  title: "NextTrack — recommendations that keep moving",
   description:
     "Reads your listening history and your 0-5 ratings to suggest music that actually fits, and keeps it varied.",
 };

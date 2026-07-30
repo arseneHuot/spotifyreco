@@ -48,7 +48,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 const MAX_URIS_PER_REQUEST = 100;
 
 /** Description posée sur les playlists créées par l'app. */
-const EXPORT_DESCRIPTION = "Selection exported from Rotation.";
+const EXPORT_DESCRIPTION = "Selection exported from NextTrack.";
 
 /** La playlist référencée localement n'existe plus, ou n'appartient pas à l'utilisateur. */
 export class PlaylistNotFoundError extends Error {
@@ -388,12 +388,12 @@ export type WritablePlaylist = {
    *
    * `/me/playlists` a cessé de renvoyer l'objet `tracks` (constaté le
    * 28/07/2026 : le champ est absent, pas vide). Le retrouver exigerait un
-   * appel par playlist. On ne l'affiche donc que pour celles dont Rotation
+   * appel par playlist. On ne l'affiche donc que pour celles dont NextTrack
    * tient le compte — mieux vaut ne rien dire qu'annoncer zéro.
    */
   trackCount: number | null;
-  /** Vraie quand la playlist a été créée depuis Rotation. */
-  fromRotation: boolean;
+  /** Vraie quand la playlist a été créée depuis NextTrack. */
+  fromNextTrack: boolean;
 };
 
 /** Spotify plafonne cet endpoint à 50 entrées par page. */
@@ -424,7 +424,7 @@ type SpotifyPlaylistPage = {
  * aussi celles qu'on suit sans les posséder, et y ajouter un morceau échoue en
  * 403. Les proposer reviendrait à offrir un bouton qui ne peut qu'échouer.
  *
- * Les playlists connues de Rotation sont remontées en tête : ce sont celles
+ * Les playlists connues de NextTrack sont remontées en tête : ce sont celles
  * qu'on alimente semaine après semaine, donc les cibles les plus probables.
  */
 export async function listWritablePlaylists(
@@ -459,7 +459,7 @@ export async function listWritablePlaylists(
         playlistId: item.id,
         name: item.name,
         trackCount: item.tracks?.total ?? countByPlaylist.get(item.id) ?? null,
-        fromRotation: countByPlaylist.has(item.id),
+        fromNextTrack: countByPlaylist.has(item.id),
       });
     }
 
@@ -467,7 +467,7 @@ export async function listWritablePlaylists(
   }
 
   collected.sort((a, b) => {
-    if (a.fromRotation !== b.fromRotation) return a.fromRotation ? -1 : 1;
+    if (a.fromNextTrack !== b.fromNextTrack) return a.fromNextTrack ? -1 : 1;
     return a.name.localeCompare(b.name);
   });
 
