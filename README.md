@@ -17,7 +17,10 @@ Claude (Anthropic's LLM) reasoning over a natural-language portrait of your
 taste. You rate, they compete, the stats page tells you which one knows you
 better.
 
-![NextTrack — browsing a selection while listening](docs/screenshots/app-playing.png)
+![NextTrack in 30 seconds](docs/promo.gif)
+
+*The 30-second pitch (in French). It's a plain HTML file — [open the live
+version](docs/promo.html) and press Space to replay it.*
 
 ## Why
 
@@ -38,6 +41,8 @@ decision follows from it:
   account and everything goes with it.
 
 ## What it looks like
+
+![NextTrack — browsing a selection while listening](docs/screenshots/app-playing.png)
 
 | | |
 |---|---|

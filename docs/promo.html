@@ -416,7 +416,8 @@
   document.getElementById("replay").addEventListener("click", play);
   // Espace = rejouer, pour l'enregistrement d'écran.
   addEventListener("keydown", e => { if (e.key === " ") { e.preventDefault(); play(); } });
-  play();
+  // ?norun : un outil de capture gèle d'abord l'horloge, puis appelle play() lui-même.
+  if (!location.search.includes("norun")) play();
 </script>
 </body>
 </html>
